@@ -21,11 +21,18 @@
       <ul id="messages"></ul>
     </div>
 </div>
-
-<form action="">
-  <button>发送</button>
-  <div class="inputwrap"><input id="m" autocomplete="off" /></div>
-</form>
+<div class="bottom">
+    <form class="toolbar">
+        <a href="javascript:void(0)" id="imageIcon">
+            <img src="images/u52.png" width="30">
+        </a>
+        <input type="file" id="image" class="display-none">
+    </form>
+    <form action="">
+        <button>发送</button>
+        <div class="inputwrap"><input id="m" autocomplete="off" /></div>
+    </form>
+</div>
 <script>
   var id = '<%= id%>';
   var name = '<%= name%>';
