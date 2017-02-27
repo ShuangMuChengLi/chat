@@ -3,7 +3,9 @@ var router = express.Router();
 var url=require('url');
 var qs=require('querystring');//解析参数的库
 var users = require('../dao/user');
-
+router.get('/message', function(req, res, next) {
+  res.render('server-sent');
+});
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var arg = url.parse(req.url).query;
@@ -22,4 +24,5 @@ router.get('/', function(req, res, next) {
     }
   });
 });
+
 module.exports = router;

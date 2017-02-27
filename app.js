@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var his = require('./routes/history');
+var serverSent = require('./routes/serverSent');
 var app = express();
 
 // view engine setup
@@ -22,6 +23,7 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'upload')));
 app.use('/history', his);
+app.use('/serversent', serverSent);
 app.use('/', index);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
