@@ -3,7 +3,6 @@ var $messages = $('#messages');
 var $m = $('#m');
 var $winHeight = $(window).height();
 var $document = $(document);
-$("#left").add("#right").css("height",$winHeight + "px");
 socket.emit('user login', {
     name : name,
     id : id,

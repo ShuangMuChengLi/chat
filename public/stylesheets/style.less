@@ -1,67 +1,95 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font: 13px Helvetica, Arial;padding-bottom: 90px }
-.bottom {
-  padding: 3px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #fff;
-  border-top:1px solid #999;
+body{
+  overflow: hidden;
 }
-.toolbar{
-  height: 30px;
-  padding-left:30px;
+ul, menu, dir {
+  list-style-type: none;
+  margin:0;
+  padding:0;
 }
-.inputwrap{
-  padding-right: 114px;
-}
-form input {
-  border: 0;
-  display: block;
-  padding: 10px;
-  margin-right: .5%;
-  width: 100%;
-  border: 1px solid #999;
-}
-form button {width:100px; float: right; background: rgb(130, 224, 255); border: none; padding: 10px; }
-#messages { list-style-type: none; margin: 0 0 ; padding: 0; }
-#messages li { padding: 5px 10px; }
-#messages li:nth-child(odd) { background: #eee;}
-
-.pr{
+.left {
+  float: left;
+  width: 180px;
+  height: auto;
   position: relative;
+  padding: 10px 0 0 10px;
+  border-right: 1px solid #d6d6d6;
+  background-color: #f4f6fb;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.right{
+  width: auto;
+  height: auto;
+  min-height: 510px;
+  overflow-x: auto !important;
+  padding: 10px;
+}
+.photo{
+  margin-right:5px;
+}
+.state{
+  width: 10px;
+  height: 10px;
+  border-radius:50%;
+  border:#e3e3e4;
+  background-color: #14d212;
+  margin:13px 13px 0 0;
 }
 .fr{
-  float: left;
-}
-.leftNav{
-  width: 100px;
-  height: 1000px;
-  position: fixed;
-  border-right:1px solid #999;
-  padding:10px;
-}
-.userListTitle{
-  font-size: 18px;
-  border-bottom: 1px solid #999;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  float: right;
 }
 .userList li{
-  line-height: 25px;
+  margin-bottom: 1rem;
 }
-.content-wrap{
-  padding-left: 100px;
+.content{
+  padding:10px;
 }
-.info{
-  color: dodgerblue;
+.content-photo{
+  float: left;
 }
-.my{
-  color: orangered;
+.dialogue-content{
+  display: inline-block;
+  vertical-align: top;
+}
+.bubble{
+  border: 1px solid #efefef;
+  padding:5px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  background-color: #eeeeff;
+  position: relative;
 }
 .who{
-  padding-right: 10px;
+  margin-top:5px;
+  font-size: 12px;
+  color: #666;
 }
-input.display-none{
-  display: none;
+.tail{
+  width:7px;
+  height:12px;
+  background: url("../images/tail.png");
+  position: absolute;
+  left: -5px;
+  top:10px;
+}
+.dialogue-user{
+  display: inline-block;
+  margin-right:5px;
+  text-align: center;
+}
+.me{
+  text-align: right;
+}
+.me .dialogue-user{
+  float: right;
+}
+.me .dialogue-user{
+  margin-left:10px;
+  margin-right:0;
+}
+.me .tail{
+  left: auto;
+  right: -5px;
+  background-position: -6px 0 ;
 }

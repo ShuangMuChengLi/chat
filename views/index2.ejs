@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+  <title>Socket.IO chat</title>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+<div class="pr">
+    <div class="leftNav">
+        <h1 class="userListTitle">在线人员</h1>
+        <ul class="userList" id="userList">
+        </ul>
+        <div>
+            <button class="btn btn-info btn-xs" id="showHistory">显示历史记录</button>
+        </div>
+    </div>
+    <div class="content-wrap">
+      <ul id="messages"></ul>
+    </div>
+</div>
+<div class="bottom">
+    <form class="toolbar">
+        <a href="javascript:void(0)" id="imageIcon">
+            <img src="images/u52.png" width="30">
+        </a>
+        <input type="file" id="image" class="display-none">
+    </form>
+    <form action="">
+        <button>发送</button>
+        <div class="inputwrap"><input id="m" autocomplete="off" /></div>
+    </form>
+</div>
+<script>
+  var id = '<%= id%>';
+  var name = '<%= name%>';
+  var room = '<%= room%>';
+</script>
+<script src="/javascripts/socket.io.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="javascripts/index.js"></script>
+</body>
+</html>
