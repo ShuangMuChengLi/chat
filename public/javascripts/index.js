@@ -43,7 +43,7 @@ socket.on('updateOnlineUsers' + room, function(data){
     $('#userList').html(html);
 });
 $("#showHistory").on("click",function () {
-    $.get("http://172.16.36.156:3000/history?room=" + room + "&time=" + new Date().getTime(),function (data) {
+    $.get("/history?room=" + room + "&time=" + new Date().getTime(),function (data) {
 
         var sLi = "";
         for (var i=0 ; i<data.length ; i++){
