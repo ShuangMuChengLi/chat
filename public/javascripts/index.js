@@ -9,7 +9,7 @@ socket.emit('user login', {
     id : id,
     room : room
 });
-$('form').submit(function(){
+function submitMsg() {
     socket.emit('chat message' + room, {
         msg :$m.val(),
         name : name,
@@ -17,14 +17,46 @@ $('form').submit(function(){
         room : room
     });
     $m.val('');
+}
+$('#submit').on("click",function(){
+    submitMsg();
     return false;
 });
+$m.on("keydown",function (e) {
+    var theEvent = e || window.event;
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+    if (code == 13) {
+        //回车执行查询
+        submitMsg();
+        return false;
+    }
+});
+function show(SenderName,MessageContext,type) {
+    var sLi = '';
+    if (type == "me"){
+        sLi += '<li class="clearfix me">';
+    }else{
+        sLi += '<li class="clearfix">';
+    }
+    sLi += '<div class="dialogue-user">';
+    sLi += '<img src="images/user.png"/>';
+    sLi += '<div class="who">' + SenderName + '</div>';
+    sLi += '</div>';
+    sLi += '<div class="dialogue-content">';
+    sLi += '<div class="bubble">';
+    sLi += '<div>' + MessageContext + '</div>';
+    sLi += '<div class="tail"></div>';
+    sLi += '</div>';
+    sLi += '</div>';
+    sLi += '</li>';
+    return sLi;
+}
 socket.on('chat message' + room, function(data){
     var sLi = "";
     if(data.name == name){
-        sLi = "<li class='my'><span class='who'>我:</span>" + data.msg + "</li>";
+        sLi += show(data.name,data.msg,"me");
     }else{
-        sLi = "<li><span class='who'>" + data.name + ":</span>" + data.msg + "</li>";
+        sLi += show(data.name,data.msg,"he");
     }
     $messages.append(sLi);
     var h = $document.height() - $winHeight;
@@ -32,26 +64,30 @@ socket.on('chat message' + room, function(data){
 });
 socket.on('message' + room, function(data){
     var message = data.message;
-    $messages.append('<li ><span class="info">系统提示：</span>' + message + "</li>");
+    $messages.append('<li class="sys-info"><span class="info">系统提示：</span>' + message + "</li>");
 
 });
 socket.on('updateOnlineUsers' + room, function(data){
     var users = data.users;
     var html = "";
     for(var i = 0; i < users.length ; i++){
-        html += '<li>' + users[i] + "</li>";
+        html += '<li>';
+        html += '<img src="images/user.png" class="photo"/>';
+        html += '<span>' + users[i] + '</span>';
+        html += '<div class="fr state">';
+        html += '</div>';
+        html += '</li>';
     }
     $('#userList').html(html);
 });
 $("#showHistory").on("click",function () {
     $.get("/history?room=" + room + "&time=" + new Date().getTime(),function (data) {
-
         var sLi = "";
         for (var i=0 ; i<data.length ; i++){
             if(data[i].SenderName == name){
-                sLi += "<li class='my'><span class='who'>我:</span>" + data[i].MessageContext + "</li>";
+                sLi += show(data[i].SenderName,data[i].MessageContext,"me");
             }else{
-                sLi += "<li><span class='who'>" + data[i].SenderName + ":</span>" + data[i].MessageContext + "</li>";
+                sLi += show(data[i].SenderName,data[i].MessageContext,"he");
             }
         }
         $messages.html(sLi);

@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-  <title>Socket.IO chat</title>
+  <title>实时通讯</title>
   <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
 </head>
@@ -11,101 +11,38 @@
 <div class="wrapper">
     <div class="left" id="left">
         <div>
-            <ul class="userList">
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
+            <ul class="userList" id="userList">
 
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
-                <li>
-                    <img src="images/user.png" class="photo"/>
-                    <span>李医生</span>
-                    <div class="fr state">
-
-                    </div>
-                </li>
             </ul>
         </div>
-
+        <div class="showHistory-wrap">
+            <button class="btn btn-info btn-sm" id="showHistory">显示历史记录</button>
+        </div>
     </div>
     <div class="right" id="right">
         <div class="content">
-            <ul>
-                <li class="clearfix">
-                    <div class="dialogue-user">
-                        <img src="images/user.png"/>
-                        <div class="who">李医生</div>
-                    </div>
-                    <div class="dialogue-content">
+            <ul id="messages" class="message">
 
-                        <div class="bubble">
-                            <div>你好</div>
-                            <div class="tail"></div>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix me">
-                    <div class="dialogue-user">
-                        <img src="images/user.png"/>
-                        <div class="who">李医生</div>
-                    </div>
-                    <div class="dialogue-content">
-
-                        <div class="bubble">
-                            <div>你好</div>
-                            <div class="tail"></div>
-                        </div>
-                    </div>
-                </li>
-                <li
             </ul>
+        </div>
+        <div class="input-wrap ">
+            <div class="tool">
+                <a href="javascript:void(0)">
+                    <img src="images/face.png">
+                </a>
+                <a href="javascript:void(0)" id="imageIcon">
+                    <img src="images/img.png">
+                </a>
+            </div>
+            <textarea class="input" id="m"></textarea>
+            <div class="submit-wrap clearfix">
+                <div class="submit" id="submit">发送</div>
+            </div>
         </div>
     </div>
 </div>
+
+<input type="file" id="image" class="display-none">
 <script>
   var id = '<%= id%>';
   var name = '<%= name%>';
