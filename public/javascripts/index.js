@@ -6,16 +6,22 @@ var $document = $(document);
 var $faceContentList = $("#faceContentList");
 var $faceContent = $("#faceContent");
 var oFace = new QQFace("images/face/");
+
+// 初始化布局
 $("#left").add("#right").css("height",$winHeight + "px");
 $(window).resize(function () {
     var $winHeight = $(window).height();
     $("#left").add("#right").css("height",$winHeight + "px");
 });
+
+//socket.io 通讯
+//进入
 socket.emit('user login', {
     name : name,
     id : id,
     room : room
 });
+// 发送消息
 function submitMsg() {
     socket.emit('chat message' + room, {
         msg :$m.val(),
@@ -38,6 +44,7 @@ $m.on("keydown",function (e) {
         return false;
     }
 });
+// 显示消息
 function show(SenderName,MessageContext,type) {
     MessageContext = oFace.replace(MessageContext);
     var sLi = '';
@@ -70,11 +77,13 @@ socket.on('chat message' + room, function(data){
     var h = $document.height() - $winHeight;
     $document.scrollTop(h);
 });
+// 系统提示
 socket.on('message' + room, function(data){
     var message = data.message;
     $messages.append('<li class="sys-info"><span class="info">系统提示：</span>' + message + "</li>");
 
 });
+// 更新用户列表
 socket.on('updateOnlineUsers' + room, function(data){
     var users = data.users;
     var html = "";
@@ -88,6 +97,8 @@ socket.on('updateOnlineUsers' + room, function(data){
     }
     $('#userList').html(html);
 });
+
+//显示历史记录
 $("#showHistory").on("click",function () {
     $.get("/history?room=" + room + "&time=" + new Date().getTime(),function (data) {
         var sLi = "";
@@ -101,6 +112,8 @@ $("#showHistory").on("click",function () {
         $messages.html(sLi);
     });
 });
+
+// 上传图片
 fnCompressImg = function (imgData , maxWidth , maxHeight, callback) {
 
     if (!imgData) return;
@@ -175,8 +188,10 @@ $("#image").on("change",function () {
         // })
     });
 });
-var sHtmlFace = "";
 
+
+// 表情
+var sHtmlFace = "";
 for(var i = 0;i<105 ; i++){
     var sData =  oFace.data[i][1];
     sHtmlFace += '<li><img title="' + sData +'" data-code="[' + sData +']" src="images/face/faceIcon/' + i + '.png"></li>';
@@ -219,6 +234,6 @@ function insertText(obj,str) {
 $faceContentList.on("click","li",function () {
     $this = $(this);
     var code = $this.find("img").data("code");
-    insertText($m[0],code)
+    insertText($m[0],code);
     $faceContent.hide();
 });
