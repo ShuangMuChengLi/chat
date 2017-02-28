@@ -26,15 +26,21 @@
             </ul>
         </div>
         <div class="input-wrap ">
+            <div class="faceContent" id="faceContent">
+                <ul class="clearfix" id="faceContentList">
+                    <li><img src="images/face/1.gif"></li>
+                </ul>
+            </div>
+
             <div class="tool">
-                <a href="javascript:void(0)">
+                <a href="javascript:void(0)" id="faceIcon">
                     <img src="images/face.png">
                 </a>
                 <a href="javascript:void(0)" id="imageIcon">
                     <img src="images/img.png">
                 </a>
             </div>
-            <textarea class="input" id="m"></textarea>
+            <textarea contenteditable="true" class="input" id="m"></textarea>
             <div class="submit-wrap clearfix">
                 <div class="submit" id="submit">发送</div>
             </div>
@@ -48,6 +54,8 @@
   var name = '<%= name%>';
   var room = '<%= room%>';
 </script>
+<script src="/javascripts/qqface.js"></script>
+<script src="/javascripts/qqfaceConfig.js"></script>
 <script src="/javascripts/socket.io.min.js"></script>
 <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="javascripts/index.js"></script>

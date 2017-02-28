@@ -6,6 +6,10 @@ ul, menu, dir {
   margin:0;
   padding:0;
 }
+a:hover {
+  color: #337ab7;
+  text-decoration: none;
+}
 .left {
   float: left;
   width: 180px;
@@ -20,7 +24,6 @@ ul, menu, dir {
 .right{
   width: auto;
   height: auto;
-  min-height: 510px;
   overflow-x: auto !important;
   position: relative;
   padding-bottom: 200px;
@@ -103,7 +106,9 @@ ul, menu, dir {
   height: 200px;
   border-top:1px solid #d6d6d6;
   width: 100%;
+  background-color: #fff;
 }
+
 .tool{
   padding :5px 0;
 }
@@ -145,4 +150,20 @@ body .display-none{
 }
 .messages img{
   max-width: 95%;
+}
+.faceContent{
+  width: 300px;
+  height:180px;
+  position: absolute;
+  top:-180px;
+  left: 0;
+  border:1px solid #eee;
+  background-color: #fefefe;
+  overflow-y: auto;
+  display: none;
+}
+.faceContent li{
+  margin:5px;
+  float: left;
+  cursor: pointer;
 }

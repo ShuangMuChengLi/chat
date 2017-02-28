@@ -3,7 +3,14 @@ var $messages = $('#messages');
 var $m = $('#m');
 var $winHeight = $(window).height();
 var $document = $(document);
+var $faceContentList = $("#faceContentList");
+var $faceContent = $("#faceContent");
+var oFace = new QQFace("images/face/");
 $("#left").add("#right").css("height",$winHeight + "px");
+$(window).resize(function () {
+    var $winHeight = $(window).height();
+    $("#left").add("#right").css("height",$winHeight + "px");
+});
 socket.emit('user login', {
     name : name,
     id : id,
@@ -32,6 +39,7 @@ $m.on("keydown",function (e) {
     }
 });
 function show(SenderName,MessageContext,type) {
+    MessageContext = oFace.replace(MessageContext);
     var sLi = '';
     if (type == "me"){
         sLi += '<li class="clearfix me">';
@@ -128,7 +136,7 @@ fnCompressImg = function (imgData , maxWidth , maxHeight, callback) {
     // 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
     img.src = imgData;
 
-}
+};
 var fnGetBase64  = function(obj,fn){
     var file = obj.files[0];
     //防止空指针
@@ -146,10 +154,10 @@ var fnGetBase64  = function(obj,fn){
     }
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function(e){
-        fn(this.result);;
+    reader.onload = function(){
+        fn(this.result);
     };
-}
+};
 $("#imageIcon").on("click",function () {
     $("#image").trigger("click");
 });
@@ -161,9 +169,56 @@ $("#image").on("change",function () {
                 name : name,
                 id : id,
                 room : room,
-                type : "pic",
+                type : "pic"
                 // minpic :"<img src='" + data2 + "'/>"
             });
         // })
     });
-})
+});
+var sHtmlFace = "";
+
+for(var i = 0;i<105 ; i++){
+    var sData =  oFace.data[i][1];
+    sHtmlFace += '<li><img title="' + sData +'" data-code="[' + sData +']" src="images/face/faceIcon/' + i + '.png"></li>';
+}
+$faceContentList.html(sHtmlFace);
+$("#faceIcon").on("click",function (e) {
+    if (e || e.stopPropagation) {
+        e.stopPropagation();
+    } else {
+        window.event.CancelBubble = true;
+    }
+    $faceContent.show();
+});
+$faceContent.on("click",function (e) {
+    if (e || e.stopPropagation) {
+        e.stopPropagation();
+    } else {
+        window.event.CancelBubble = true;
+    }
+});
+$(document).on("click",function () {
+    $faceContent.hide();
+});
+function insertText(obj,str) {
+    if (document.selection) {
+        var sel = document.selection.createRange();
+        sel.text = str;
+    } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+        var startPos = obj.selectionStart,
+            endPos = obj.selectionEnd,
+            cursorPos = startPos,
+            tmpStr = obj.value;
+        obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+        cursorPos += str.length;
+        obj.selectionStart = obj.selectionEnd = cursorPos;
+    } else {
+        obj.value += str;
+    }
+}
+$faceContentList.on("click","li",function () {
+    $this = $(this);
+    var code = $this.find("img").data("code");
+    insertText($m[0],code)
+    $faceContent.hide();
+});
